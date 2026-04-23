@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart List Controller</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; text-align: center; padding-top: 50px; background-color: #f4f4f9; }
+        
+        .container { background: white; display: inline-block; padding: 30px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+
+        /* Classes we will toggle with JS */
+        .red-text { color: #e74c3c; font-weight: bold; }
+        .bordered { border: 3px dashed #3498db; border-radius: 10px; }
+        .hidden { display: none; }
+
+        p { padding: 15px; transition: all 0.3s ease; font-size: 1.2rem; }
+
+        button { 
+            padding: 10px 20px; margin: 5px; cursor: pointer; 
+            border: none; border-radius: 5px; background: #2c3e50; 
+            color: white; font-weight: bold; 
+        }
+        
+        button:hover { background: #34495e; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Smart Controller</h1>
+        
+        <p class="text-item">Item #1: The Apple</p>
+        <p class="text-item">Item #2: The Banana</p>
+        <p class="text-item">Item #3: The Cherry</p>
+
+        <hr>
+
+        <button class="control-btn">Change Color</button>
+        <button class="control-btn">Add Border</button>
+        <button class="control-btn">Reset All</button>
+    </div>
+
+    <script>
+        // 1. Find all target paragraphs and all control buttons
+        const items = document.querySelectorAll(".text-item");
+        const buttons = document.querySelectorAll(".control-btn");
+
+        // 2. Give every button an "Ear" (Event Listener)
+        buttons.forEach(function(btn) {
+            btn.addEventListener("click", function() {
+                
+                // 3. Find out WHICH button was clicked
+                let action = btn.textContent;
+
+                // 4. Branch the logic based on the button text
+                if (action === "Change Color") {
+                    items.forEach(p => p.classList.toggle("red-text"));
+                } 
+                else if (action === "Add Border") {
+                    items.forEach(p => p.classList.toggle("bordered"));
+                } 
+                else if (action === "Reset All") {
+                    items.forEach(p => {
+                        p.classList.remove("red-text");
+                        p.classList.remove("bordered");
+                    });
+                }
+
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Div Box Master</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f4f4f9;
+        }
+
+        /* The Parent Container */
+        .grid-container {
+            display: flex;
+            gap: 15px;
+            margin: 20px;
+        }
+
+        /* The Box Class (The Blueprint) */
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* A class we will add using JavaScript */
+        .active {
+            background-color: #e74c3c;
+            transform: rotate(15deg) scale(1.1);
+            border-radius: 50%; /* Turns it into a circle! */
+        }
+
+        button {
+            padding: 10px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>The Box Shuffler</h1>
+    <p>Click the button to change the "Blueprint" of the boxes!</p>
+
+    <div class="grid-container">
+        <div class="box">1</div>
+        <div class="box">2</div>
+        <div class="box">3</div>
+        <div class="box">4</div>
+    </div>
+
+    <button id="magicBtn">Activate Magic</button>
+
+    <script>
+        // 1. Grab the button and ALL the boxes
+        const btn = document.getElementById("magicBtn");
+        const allBoxes = document.querySelectorAll(".box");
+
+        // 2. Add the Event Listener to the button
+        btn.addEventListener("click", function() {
+            
+            // 3. Use the loop to talk to every box in the list
+            allBoxes.forEach(function(singleBox) {
+                
+                // 4. Toggle the 'active' class on each box
+                singleBox.classList.toggle("active");
+
+            });
+
+            // 5. Bonus: Change the button text too!
+            if (btn.textContent === "Activate Magic") {
+                btn.textContent = "Reset Boxes";
+            } else {
+                btn.textContent = "Activate Magic";
+            }
+        });
+    </script>
+
+</body>
+</html>
