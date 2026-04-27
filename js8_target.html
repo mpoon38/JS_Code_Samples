@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Social Media Manager</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; flex-direction: column; align-items: center; padding: 40px; }
+        
+        .card-container { display: flex; gap: 20px; }
+
+        /* The 'Outfit' for our cards */
+        .user-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 150px;
+            transition: 0.3s;
+        }
+
+        /* classList will toggle these outfits */
+        .following { border: 3px solid #2ecc71; background: #eafaf1; }
+        .blocked { opacity: 0.3; filter: grayscale(100%); pointer-events: none; }
+
+        button { margin-top: 10px; cursor: pointer; padding: 5px 15px; border-radius: 20px; border: 1px solid #ddd; }
+        .follow-btn { background-color: #3498db; color: white; border: none; }
+    </style>
+</head>
+<body>
+
+    <h1>Manage Your Friends</h1>
+
+    <div class="card-container">
+        <div class="user-card">
+            <h3 class="user-name">Alex</h3>
+            <p class="status">Not Following</p>
+            <button class="follow-btn">Follow</button>
+            <button class="block-btn">Block</button>
+        </div>
+
+        <div class="user-card">
+            <h3 class="user-name">Sam</h3>
+            <p class="status">Not Following</p>
+            <button class="follow-btn">Follow</button>
+            <button class="block-btn">Block</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. SELECTING ALL BUTTONS (The Megaphone)
+        const followButtons = document.querySelectorAll(".follow-btn");
+        const blockButtons = document.querySelectorAll(".block-btn");
+
+        // 2. LOGIC FOR FOLLOW BUTTONS
+        followButtons.forEach(btn => {
+            btn.addEventListener("click", function() {
+                // Find the parent card that this specific button belongs to
+                const parentCard = btn.parentElement;
+                const statusText = parentCard.querySelector(".status");
+
+                // Toggle the 'following' OUTFIT
+                parentCard.classList.toggle("following");
+
+                // Change the text content (IDENTITY) based on the state
+                if (parentCard.classList.contains("following")) {
+                    btn.textContent = "Unfollow";
+                    statusText.textContent = "Friends";
+                } else {
+                    btn.textContent = "Follow";
+                    statusText.textContent = "Not Following";
+                }
+            });
+        });
+
+        // 3. LOGIC FOR BLOCK BUTTONS
+        blockButtons.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const parentCard = btn.parentElement;
+                // Add the 'blocked' class to make the card fade out
+                parentCard.classList.add("blocked");
+            });
+        });
+    </script>
+</body>
+</html>
